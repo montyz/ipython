@@ -231,6 +231,13 @@ var IPython = (function (IPython) {
                     nbname
                 )
             ).attr('target','_blank');
+        window.open(
+                utils.url_join_encode(
+                    this.base_url,
+                    "notebooks",
+                    path,
+                    nbname
+                ), '_self');
     };
 
 
