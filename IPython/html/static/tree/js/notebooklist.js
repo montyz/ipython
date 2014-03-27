@@ -164,6 +164,7 @@ var IPython = (function (IPython) {
         item.find("a.item_link")
             .attr('href', this.baseProjectUrl()+notebook_id)
             .attr('target','_blank');
+        window.open(this.baseProjectUrl()+notebook_id, '_self');
     };
 
 
