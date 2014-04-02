@@ -37,11 +37,29 @@ var IPython = (function (IPython) {
             type : "POST",
             data: JSON.stringify(model),
             dataType : "json",
+            timeout: 500,
             success : function (data, status, xhr) {
                 that._handle_start_success(data);
                 if (callback) {
                     callback(data, status, xhr);
                 }
+            },
+            error : function (data, status, xhr) {
+                console.log('session failed to start. Trying get');
+                $.ajax(url, {
+                    processData : false,
+                    cache : false,
+                    type : "GET",
+                    data: JSON.stringify(model),
+                    dataType : "json",
+                    timeout: 500,
+                    success : function (data, status, xhr) {
+                        data = data[0];
+                        that._handle_start_success(data);
+                        if (callback) {
+                            callback(data, status, xhr);
+                        }
+            }});
             },
         };
         var url = utils.url_join_encode(this.base_url, 'api/sessions');
